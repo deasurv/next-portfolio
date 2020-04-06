@@ -1,5 +1,6 @@
 const express = require('express');
 const next = require('next');
+const mongoose = require('mongoose');
 const routes = require('./../routes');
 
 const authService = require('./services/auth');
@@ -12,6 +13,10 @@ const secretData = [
     { title: 'secret1', description: 'secret1 desc' },
     { title: 'secret2', description: 'secret2 desc' },
 ];
+
+mongoose.connect('mongodb+srv://Majid:test123@portfolio-deasurv-dev-tfa4p.mongodb.net/test?retryWrites=true&w=majority', { useNewUrlParser: true })
+        .then(() => console.log('Database connected!'))
+        .catch(error => console.log(error));
 
 app.prepare()
 .then(() => {
