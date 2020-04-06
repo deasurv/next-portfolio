@@ -1,93 +1,67 @@
-import React, { Component, Fragment } from 'react';
-import axios from 'axios';
+import React, { Component } from 'react';
+import Typed from 'react-typed'
 
 import BaseLayout from './../components/layouts/BaseLayout';
 
-/* const funcIndex = () => (
-    <div>
-        <p>Hello World!</p>
-    </div>
-); */
+import { Container, Row, Col, Button } from 'reactstrap';
 
 class index extends Component{
 
-    static async getInitialProps(){
-        /* console.log('Hello from getInitialProps!'); */
+    constructor(props){
+        super(props);
 
-        /* axios.get('https://jsonplaceholder.typicode.com/posts')
-            .then((response) => console.log(response.data))
-            .catch(error => console.log(error)); */
-        let posts;
-        try{
-            const response  = await axios.get('https://jsonplaceholder.typicode.com/posts');
-            posts = response.data;
-
-        } catch (error){
-            console.log(error);
-        }
-
-        return {
-            posts: posts,
-            myData: [1,2,3]
-        };
-    }
-
-    constructor(){
-        super();
-        /* console.log('constructor'); */
-
-        this.state = {
-            link: {
-                title: 'Go to Google!',
-                href: 'https://www.google.com'
-            }
-        }
-    }
-
-    componentWillMount(){
-        /* console.log(this);
-        console.log('componentWillMount'); */
-    }
-
-    componentDidMount(){
-        /* console.log('componentDidMount'); */
-    }
-
-    componentWillUpdate(){
-        /* console.log('componentWillUpdate'); */
-    }
-
-    componentDidUpdate(){
-        /* console.log('componentDidUpdate'); */
-    }
-
-    componentWillUnmount(){
-        /* console.log('componentWillUnmount'); */
-    }
-
-    updateLink = () => {
-        /* console.log(this); */
-        this.setState({
-            link: {
-                title: 'Go to Paziresh24',
-                href: 'https://www.paziresh24.com'
-            }
-        });
+        this.roles = ['Front-end Developer', 'HTML', 'CSS', 'Sass', 'JavaScript', 'React']
     }
 
     render(){
-        const {myData, posts} = this.props;
-        /* console.log(myData);
-        console.log('render');
-        console.log(posts); */
         return(
-            <BaseLayout>
-                { /* posts.map(post => <h3>{post.title}</h3>) */ }
-                <h1>Home page</h1>
-                <a href={this.state.link.href} target={'_blank'}>{this.state.link.title}</a>
-                <button type={'button'} onClick={this.updateLink}>Change Link</button>
+            <BaseLayout className="cover" {...this.props.auth} headerType="index">
+                <div className="main-section">
+                    <div className="background-image">
+                        <img src="/static/images/background-index.png" />
+                    </div>
+
+                    <Container>
+                        <Row>
+                            <Col md="6">
+                                <div className="hero-section">
+                                    <div className={`flipper`}>
+                                        <div className="back">
+                                            <div className="hero-section-content">
+                                                <h2> Front-end Web Developer </h2>
+                                                <div className="hero-section-content-intro">Have a look at my portfolio and job history.</div>
+                                            </div>
+                                            <img className="image" src="/static/images/section-1.png" />
+                                            <div className="shadow-custom">
+                                                <div className="shadow-inner"> </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </Col>
+                            <Col md="6" className="hero-welcome-wrapper">
+                                <div className="hero-welcome-text">
+                                    <h1>Welcome to the portfolio website of Majid Fatahi. Get informed, collaborate and discover projects I was working on through the years!</h1>
+                                </div>
+                                <Typed
+                                    className="self-typed"
+                                    loop
+                                    typeSpeed={60}
+                                    backSpeed={30}
+                                    strings={this.roles}
+                                    smartBackspace
+                                    backDelay={1000}
+                                    showCursor
+                                    cursorChar=" _"
+                                />
+                                <div className="hero-welcome-bio">
+                                    <h1>Let's take a look on my work.</h1>
+                                </div>
+                            </Col>
+                        </Row>
+                    </Container>
+                </div>
             </BaseLayout>
-            //React.createElement('div', null, React.createElement('p', null, 'Hello Wolrd!'))
         );
     }
 }
