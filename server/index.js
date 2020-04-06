@@ -8,13 +8,14 @@ const authService = require('./services/auth');
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
 const handle = routes.getRequestHandler(app);
+const config = require('./config');
 
 const secretData = [
     { title: 'secret1', description: 'secret1 desc' },
     { title: 'secret2', description: 'secret2 desc' },
 ];
 
-mongoose.connect('mongodb+srv://Majid:test123@portfolio-deasurv-dev-tfa4p.mongodb.net/test?retryWrites=true&w=majority', { useNewUrlParser: true })
+mongoose.connect(config.DB_URI, { useNewUrlParser: true })
         .then(() => console.log('Database connected!'))
         .catch(error => console.log(error));
 
