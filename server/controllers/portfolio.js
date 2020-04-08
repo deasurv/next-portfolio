@@ -11,7 +11,9 @@ exports.getPortfolios = (req, res) => {
 
 exports.savePortfolio = (req, res) => {
     const portfolioData = req.body;
+    const userID = req.user && req.user.sub;
     const portfolio = new Portfolio(portfolioData);
+    portfolio.userID = userID;
 
     portfolio.save((error, createdPortfolio) => {
         if(error){
