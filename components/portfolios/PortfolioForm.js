@@ -1,6 +1,6 @@
 import React from 'react';
 import { Formik, Form, Field } from 'formik';
-import { Button } from 'reactstrap';
+import { Alert, Button } from 'reactstrap';
 
 import PortfolioInput from './../form/PortfolioInput';
 import PortfolioDate from './../form/PortfolioDate';
@@ -12,15 +12,15 @@ const INITIAL_VALUES = {
     location: '',
     position: '',
     description: '',
-    startDate: moment(),
-    endDate: moment()
+    startDate: '',
+    endDate: ''
 }; 
 
 const validateInputs = values => {
     let errors = {};
 
     Object.entries(values).forEach(([key, value]) => {
-        if(['startDate', 'endDate'].indexOf(key) === -1){
+        if(['endDate'].indexOf(key) === -1){
             if(!values[key]){
                 errors[key] = `Field "${key}" is required!`
             }
@@ -35,8 +35,11 @@ const validateInputs = values => {
     return errors;
 };
 
-const PortfolioForm = ({ onSubmit }) => (
+const PortfolioForm = ({ onSubmit, error }) => (
     <div>
+        { error &&
+            <Alert color="danger">{error}</Alert>
+        }
         <Formik
             initialValues={INITIAL_VALUES}
             validate={validateInputs}

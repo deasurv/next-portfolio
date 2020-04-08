@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
+import moment from 'moment';
 import DatePicker from "react-datepicker";
 import { FormGroup, Label, Button } from 'reactstrap';
-import moment from 'moment';
 
 import "react-datepicker/dist/react-datepicker.css";
 
