@@ -8,4 +8,8 @@ router.post('', authService.checkJWT, authService.checkRole('siteOwner'), portfo
 
 router.get('', authService.checkJWT, authService.checkRole('siteOwner'), portfolioController.getPortfolios);
 
+router.patch('/:id', authService.checkJWT, authService.checkRole('siteOwner'), portfolioController.updatePortfolio);
+
+router.delete('/:id', authService.checkJWT, authService.checkRole('siteOwner'), portfolioController.deletePortfolio);
+
 module.exports = router;
