@@ -1,41 +1,39 @@
 import React, { Component } from 'react';
 import { Link } from './../routes';
-import axios from 'axios';
 
 import { Row, Col, Card, CardHeader, CardTitle, CardBody, CardText } from 'reactstrap';
 
 import BaseLayout from './../components/layouts/BaseLayout';
 import BasePage from './../components/BasePage';
 
+import { getPortfolios } from './../actions';
+
 class portfolios extends Component{
 
     static async getInitialProps(){
-        let posts = [];
+        let portfolios = [];
 
         try{
-            const response = await axios.get('https://jsonplaceholder.typicode.com/posts');
-            posts = response.data.splice(0, 10);
-        } catch (error){
+            portfolios = await getPortfolios();
+        }catch(error){
             console.log(error);
         }
 
-        return {
-            posts: posts
-        };
+        return { portfolios };
     }
 
-    renderPost(post, index){
+    renderPortfolio(portfolio, index){
         return (
-            <Col md="4">
-                <React.Fragment key={index}>
+            <Col md="4" key={index}>
+                <React.Fragment>
                     <span>
                         <Card className="portfolio-card">
-                            <CardHeader className="portfolio-card-header">Some Position {index}</CardHeader>
+                            <CardHeader className="portfolio-card-header">{portfolio.position}</CardHeader>
                             <CardBody>
-                                <p className="portfolio-card-city"> Some Location {index} </p>
-                                <CardTitle className="portfolio-card-title">Some Company {index}</CardTitle>
-                                <CardText className="portfolio-card-text">Some Description {index}</CardText>
-                                <div className="readMore"> </div>
+                                <p className="portfolio-card-city">{portfolio.location}</p>
+                                <CardTitle className="portfolio-card-title">{portfolio.title}</CardTitle>
+                                <CardText className="portfolio-card-text">{portfolio.description}</CardText>
+                                <div className="readMore"></div>
                             </CardBody>
                         </Card>
                     </span>
@@ -44,20 +42,20 @@ class portfolios extends Component{
         );
     }
 
-    renderPosts(posts){
+    renderPortfolios(portfolios){
         return (
             <Row>
-                { posts.map((post, index) => this.renderPost(post, index)) }
+                { portfolios.map((portfolio, index) => this.renderPortfolio(portfolio, index)) }
             </Row>
         );
     }
 
     render(){
-        const { posts } = this.props;
+        const { portfolios } = this.props;
         return(
             <BaseLayout {...this.props.auth}>
                 <BasePage className="portfolio-page" title="Portfolios page">
-                    { this.renderPosts(posts) }
+                    { this.renderPortfolios(portfolios) }
                 </BasePage>
             </BaseLayout>
         );

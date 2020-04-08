@@ -6,7 +6,7 @@ const portfolioController = require('./../controllers/portfolio');
 
 router.post('', authService.checkJWT, authService.checkRole('siteOwner'), portfolioController.savePortfolio);
 
-router.get('', authService.checkJWT, authService.checkRole('siteOwner'), portfolioController.getPortfolios);
+router.get('', portfolioController.getPortfolios);
 
 router.patch('/:id', authService.checkJWT, authService.checkRole('siteOwner'), portfolioController.updatePortfolio);
 

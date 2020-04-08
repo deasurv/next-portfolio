@@ -16,3 +16,7 @@ export const getSecretData = async (req) => {
 /* export const getSecretDataServer = async (req) => {
     return await axios.get('http://localhost:3000/api/v1/secret', setAuthHeader(req)).then(res => res.data);
 } */
+
+export const getPortfolios = async() => {
+    return await axios.get('http://localhost:3000/api/v1/portfolios').then(res => res.data);
+}
