@@ -6,7 +6,7 @@ import { Row, Col, Card, CardHeader, CardTitle, CardBody, CardText, Button } fro
 import BaseLayout from './../components/layouts/BaseLayout';
 import BasePage from './../components/BasePage';
 
-import { getPortfolios } from './../actions';
+import { getPortfolios, deletePortfolio } from './../actions';
 import { Router } from './../routes';
 
 class portfolios extends Component{
@@ -38,7 +38,7 @@ class portfolios extends Component{
                                 <CardText className="portfolio-card-text">{portfolio.description}</CardText>
                                 { isAuthenticated && isSiteOwner &&
                                     <div className="readMore">
-                                        <Button color="primary" onClick={() => Router.pushRoute(`/portfolios/${portfolio._id}/edit`)}>Edit</Button> <Button color="danger">Delete</Button>
+                                        <Button color="primary" onClick={() => Router.pushRoute(`/portfolios/${portfolio._id}/edit`)}>Edit</Button> <Button color="danger" onClick={() => this.displayDeleteWarning(portfolio._id)}>Delete</Button>
                                     </div>
                                 }
                             </CardBody>
@@ -55,6 +55,23 @@ class portfolios extends Component{
                 { portfolios.map((portfolio, index) => this.renderPortfolio(portfolio, index)) }
             </Row>
         );
+    }
+
+    displayDeleteWarning(portfolioID){
+        const isConfirmed = window.confirm('Are you sure to delete this portfolio?!');
+
+        if(isConfirmed){
+            this.deletePortfolio(portfolioID);
+        }
+    }
+
+    async deletePortfolio(portfolioID){
+        try{
+            const responce = await deletePortfolio(portfolioID);
+            Router.pushRoute('/portfolios');
+        }catch(error){
+            console.log(error);
+        }
     }
 
     render(){
