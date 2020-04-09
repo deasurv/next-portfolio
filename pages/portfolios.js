@@ -1,10 +1,8 @@
-import React, { Component } from 'react';
-import { Link } from './../routes';
-
-import { Row, Col, Card, CardHeader, CardTitle, CardBody, CardText, Button } from 'reactstrap';
-
+import React, { Component, Fragment } from 'react';
 import BaseLayout from './../components/layouts/BaseLayout';
 import BasePage from './../components/BasePage';
+import { Row, Col, Button } from 'reactstrap';
+import PortfolioCard from './../components/portfolios/PortfolioCard';
 
 import { getPortfolios, deletePortfolio } from './../actions';
 import { Router } from './../routes';
@@ -28,23 +26,13 @@ class portfolios extends Component{
 
         return (
             <Col md="4" key={index}>
-                <React.Fragment>
-                    <span>
-                        <Card className="portfolio-card">
-                            <CardHeader className="portfolio-card-header">{portfolio.position}</CardHeader>
-                            <CardBody>
-                                <p className="portfolio-card-city">{portfolio.location}</p>
-                                <CardTitle className="portfolio-card-title">{portfolio.title}</CardTitle>
-                                <CardText className="portfolio-card-text">{portfolio.description}</CardText>
-                                { isAuthenticated && isSiteOwner &&
-                                    <div className="readMore">
-                                        <Button color="primary" onClick={() => Router.pushRoute(`/portfolios/${portfolio._id}/edit`)}>Edit</Button> <Button color="danger" onClick={() => this.displayDeleteWarning(portfolio._id)}>Delete</Button>
-                                    </div>
-                                }
-                            </CardBody>
-                        </Card>
-                    </span>
-                </React.Fragment>
+                <PortfolioCard portfolio={portfolio}>
+                    { isAuthenticated && isSiteOwner &&
+                        <Fragment>
+                            <Button color="primary" onClick={() => Router.pushRoute(`/portfolios/${portfolio._id}/edit`)}>Edit</Button> <Button color="danger" onClick={() => this.displayDeleteWarning(portfolio._id)}>Delete</Button>
+                        </Fragment>
+                    }
+                </PortfolioCard>
             </Col>
         );
     }
