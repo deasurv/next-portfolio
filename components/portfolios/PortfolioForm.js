@@ -19,8 +19,8 @@ const validateInputs = values => {
     });
 
     let { startDate, endDate } = values;
-    startDate = startDate && (typeof startDate === 'string') && moment(startDate);
-    endDate = endDate && (typeof endDate === 'string') && moment(endDate);
+    startDate = startDate && (typeof startDate === 'string') ? moment(startDate) : startDate;
+    endDate = endDate && (typeof endDate === 'string') ? moment(endDate) : endDate;
 
     if(startDate && endDate && endDate.isBefore(startDate)){
         errors.endDate = 'End date cannot be before start date!'
