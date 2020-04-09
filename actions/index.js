@@ -29,12 +29,12 @@ const rejectPromise = (responseError) => {
     return Promise.reject(error);
 }
 
-/* export const getSecretDataServer = async (req) => {
-    return await axios.get('http://localhost:3000/api/v1/secret', setAuthHeader(req)).then(res => res.data);
-} */
-
 export const getPortfolios = async () => {
     return await axiosInstance.get('/portfolios').then(res => res.data);
+}
+
+export const getPortfolioByID = async (id) => {
+    return await axiosInstance.get(`/portfolios/${id}`).then(res => res.data);
 }
 
 export const createPortfolio = async (portfolioData) => {

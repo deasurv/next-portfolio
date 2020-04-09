@@ -7,11 +7,16 @@ import "react-datepicker/dist/react-datepicker.css";
 
 export default class PortfolioDate extends Component {
 
-    state = {
-        dateValue: moment(),
-        isHidden: false
-    };
+    constructor(props){
+        super(props);
 
+        const dateValue = props.initialDate ? moment(props.initialDate) : moment();
+
+        this.state = {
+            dateValue,
+            isHidden: false
+        };
+    }
 
     setFieldValueAndTouched(date, touched){
         const { setFieldValue, setFieldTouched } = this.props.form;
@@ -27,7 +32,7 @@ export default class PortfolioDate extends Component {
         });
 
         this.setFieldValueAndTouched(date, true);
-    };
+    }
 
     toggleDate(date){
         this.setState({

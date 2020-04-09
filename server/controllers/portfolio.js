@@ -9,6 +9,17 @@ exports.getPortfolios = (req, res) => {
     });
 };
 
+exports.getPortfolioByID = (req, res) => {
+    const portfolioID = req.params.id;
+
+    Portfolio.findById(portfolioID, (error, foundPortfolio) => {
+        if(error){
+            return res.status(422).send(error);
+        }
+        return res.json(foundPortfolio);
+    });
+};
+
 exports.savePortfolio = (req, res) => {
     const portfolioData = req.body;
     const userID = req.user && req.user.sub;

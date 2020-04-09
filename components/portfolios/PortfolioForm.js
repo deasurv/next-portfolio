@@ -4,17 +4,6 @@ import { Alert, Button } from 'reactstrap';
 
 import PortfolioInput from './../form/PortfolioInput';
 import PortfolioDate from './../form/PortfolioDate';
-import moment from 'moment';
-
-const INITIAL_VALUES = {
-    title: '',
-    company: '',
-    location: '',
-    position: '',
-    description: '',
-    startDate: '',
-    endDate: ''
-}; 
 
 const validateInputs = values => {
     let errors = {};
@@ -35,13 +24,13 @@ const validateInputs = values => {
     return errors;
 };
 
-const PortfolioForm = ({ onSubmit, error }) => (
+const PortfolioForm = ({ initialValues, onSubmit, error }) => (
     <div>
         { error &&
             <Alert color="danger">{error}</Alert>
         }
         <Formik
-            initialValues={INITIAL_VALUES}
+            initialValues={initialValues}
             validate={validateInputs}
             onSubmit={onSubmit} >
             
@@ -52,8 +41,8 @@ const PortfolioForm = ({ onSubmit, error }) => (
                     <Field type="text" name="location" label="Location" component={PortfolioInput} />
                     <Field type="text" name="position" label="Position" component={PortfolioInput} />
                     <Field component="textarea" name="description" label="Description" component={PortfolioInput} />
-                    <Field name="startDate" label="Start date" component={PortfolioDate} />
-                    <Field name="endDate" label="End date" component={PortfolioDate} canBeDisabled />
+                    <Field name="startDate" label="Start date" initialDate={initialValues.startDate} component={PortfolioDate} />
+                    <Field name="endDate" label="End date" initialDate={initialValues.endDate} component={PortfolioDate} canBeDisabled />
                     
                     <Button color="success" size="lg" type="submit" disabled={isSubmitting}>Create</Button>
                 </Form>
