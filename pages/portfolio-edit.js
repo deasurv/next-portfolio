@@ -6,7 +6,7 @@ import BasePage from './../components/BasePage';
 
 import PortfolioForm from './../components/portfolios/PortfolioForm';
 
-import { createPortfolio, getPortfolioByID } from './../actions';
+import { getPortfolioByID, updatePortfolio } from './../actions';
 
 import withAuth from './../components/hoc/withAuth';
 import { Router } from './../routes';
@@ -29,10 +29,10 @@ class PortfolioEdit extends Component{
         return { portfolio };
     }
 
-    savePortfolio = (portfolioData, { setSubmitting }) => {
-        /* setSubmitting(true);
+    updatePortfolio = (portfolioData, { setSubmitting }) => {
+        setSubmitting(true);
 
-        createPortfolio(portfolioData)
+        updatePortfolio(portfolioData)
         .then(portfolio => {
             setSubmitting(false);
             this.setState({error: undefined});
@@ -42,7 +42,7 @@ class PortfolioEdit extends Component{
             const error = err.message || 'Server error!';
             setSubmitting(false);
             this.setState({ error });
-        }); */
+        });
     }
 
     render(){
@@ -54,7 +54,7 @@ class PortfolioEdit extends Component{
                 <BasePage className="portfolio-create-page" title="Update portfolio">
                     <Row>
                         <Col md="6">
-                            <PortfolioForm initialValues={portfolio} onSubmit={this.savePortfolio} error={error} />
+                            <PortfolioForm initialValues={portfolio} onSubmit={this.updatePortfolio} error={error} />
                         </Col>
                     </Row>
                 </BasePage>

@@ -5,6 +5,8 @@ import { Alert, Button } from 'reactstrap';
 import PortfolioInput from './../form/PortfolioInput';
 import PortfolioDate from './../form/PortfolioDate';
 
+import moment from 'moment';
+
 const validateInputs = values => {
     let errors = {};
 
@@ -16,7 +18,10 @@ const validateInputs = values => {
         }
     });
 
-    const { startDate, endDate } = values;
+    let { startDate, endDate } = values;
+    startDate = startDate && (typeof startDate === 'string') && moment(startDate);
+    endDate = endDate && (typeof endDate === 'string') && moment(endDate);
+
     if(startDate && endDate && endDate.isBefore(startDate)){
         errors.endDate = 'End date cannot be before start date!'
     }
