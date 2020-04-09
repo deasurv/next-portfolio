@@ -6,22 +6,22 @@ import auth0 from './../services/auth0';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './../styles/main.scss';
 
+const namespace = 'http://localhost:3000';
+
 export default class MyApp extends App {
 
   static async getInitialProps({ Component, router, ctx }) {
     let pageProps = {};
 
     const user = process.browser ? await auth0.clientAuth() : await auth0.serverAuth(ctx.req);
-    const auth = { user, isAuthenticated: !!user };
+    const isSiteOwner = user && user[`${namespace}/roles`] === 'siteOwner';
+    const auth = { user, isAuthenticated: !!user, isSiteOwner };
 
     if (Component.getInitialProps) {
       pageProps = await Component.getInitialProps(ctx)
     }
 
-    return {
-      pageProps,
-      auth
-    };
+    return { pageProps, auth};
   }
 
   render () {
