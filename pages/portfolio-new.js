@@ -11,14 +11,16 @@ import { createPortfolio } from './../actions';
 import withAuth from './../components/hoc/withAuth';
 import { Router } from './../routes';
 
+import moment from 'moment';
+
 const INITIAL_VALUES = {
     title: '',
     company: '',
     location: '',
     position: '',
     description: '',
-    startDate: '',
-    endDate: ''
+    startDate: moment(),
+    endDate: moment()
 }; 
 
 class PortfolioNew extends Component{

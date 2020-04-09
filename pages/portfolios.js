@@ -21,6 +21,7 @@ class portfolios extends Component{
         return { portfolios };
     }
 
+
     renderPortfolio(portfolio, index){
         const { isAuthenticated, isSiteOwner } = this.props.auth;
 
@@ -29,7 +30,8 @@ class portfolios extends Component{
                 <PortfolioCard portfolio={portfolio}>
                     { isAuthenticated && isSiteOwner &&
                         <Fragment>
-                            <Button color="primary" onClick={() => Router.pushRoute(`/portfolios/${portfolio._id}/edit`)}>Edit</Button> <Button color="danger" onClick={() => this.displayDeleteWarning(portfolio._id)}>Delete</Button>
+                            <Button color="primary" onClick={(event) => this.navigateToEdit(portfolio._id, event)}>Edit</Button>{' '}
+                            <Button color="danger" onClick={(event) => this.displayDeleteWarning(portfolio._id, event)}>Delete</Button>
                         </Fragment>
                     }
                 </PortfolioCard>
@@ -45,7 +47,15 @@ class portfolios extends Component{
         );
     }
 
-    displayDeleteWarning(portfolioID){
+    navigateToEdit(portfolioID, event){
+        event.stopPropagation();
+
+        Router.pushRoute(`/portfolios/${portfolioID}/edit`);
+    }
+
+    displayDeleteWarning(portfolioID, event){
+        event.stopPropagation();
+
         const isConfirmed = window.confirm('Are you sure to delete this portfolio?!');
 
         if(isConfirmed){
