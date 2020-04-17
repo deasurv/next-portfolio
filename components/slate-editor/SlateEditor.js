@@ -1,30 +1,10 @@
 import React, { Component, Fragment } from 'react';
 import { Editor } from 'slate-react';
-import { Value } from 'slate';
+
+import { initialValue } from './initialValue';
 
 import { renderMark } from './renderers';
 import HoverMenu from './HoverMenu';
-
-const initialValue = Value.fromJSON({
-    document: {
-        nodes: [
-            {
-                object: 'block',
-                type: 'paragraph',
-                nodes: [
-                    {
-                        object: 'text',
-                        leaves: [
-                            {
-                                text: 'A line of text in a paragraph'
-                            }
-                        ]
-                    }
-                ]
-            }
-        ]
-    }
-});
 
 class SlateEditor extends Component{
     
@@ -93,7 +73,7 @@ class SlateEditor extends Component{
             <HoverMenu innerRef={menu => this.menu = menu} editor={editor} />
           </Fragment>
         )
-      }
+    }
 }
 
 export default SlateEditor;

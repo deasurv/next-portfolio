@@ -12,6 +12,7 @@ const BaseLayout = (props) => {
             <Head>
                 <title>Majid Fatahi</title>
                 <link href="https://use.fontawesome.com/releases/v5.13.0/css/all.css" rel="stylesheet" crossOrigin="anonymous" />
+                <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
             </Head>
             <div className="layout-container" >
                 <Header className={`port-nav-${headerType}`} isAuthenticated={isAuthenticated} user={user} />
