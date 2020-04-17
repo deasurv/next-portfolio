@@ -1,10 +1,14 @@
 import React from 'react'
 import styled from 'react-emotion'
 
+function assignColor(props){
+    const { reversed, active } = props;
+    return reversed ? active ? 'white' : '#aaa' : active ? 'black' : '#ccc'
+}
+
 export const Button = styled('span')`
     cursor: pointer;
-    color: ${props =>
-        props.reversed ? props.active ? 'white' : '#aaa' : props.active ? 'black' : '#ccc'};
+    color: ${assignColor};
 `;
 
 export const Icon = styled(({ className, ...rest }) => {

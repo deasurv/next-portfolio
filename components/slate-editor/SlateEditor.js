@@ -3,7 +3,7 @@ import { Editor } from 'slate-react';
 
 import { initialValue } from './initialValue';
 
-import { renderMark } from './renderers';
+import { renderMark, renderNode } from './renderers';
 import HoverMenu from './HoverMenu';
 
 class SlateEditor extends Component{
@@ -57,6 +57,7 @@ class SlateEditor extends Component{
                         value={value}
                         onChange={this.onChange}
                         renderMark={renderMark}
+                        renderNode={renderNode}
                         renderEditor={this.renderEditor}
                     />
                 }
