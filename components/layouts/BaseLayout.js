@@ -11,9 +11,7 @@ const BaseLayout = (props) => {
         <Fragment>
             <Head>
                 <title>Majid Fatahi</title>
-
-                <link href="https://use.fontawesome.com/releases/v5.13.0/css/all.css" rel="stylesheet" crossorigin="anonymous" />
-                <script src="https://kit.fontawesome.com/5cc96674f7.js" crossorigin="anonymous"></script>
+                <link href="https://use.fontawesome.com/releases/v5.13.0/css/all.css" rel="stylesheet" crossOrigin="anonymous" />
             </Head>
             <div className="layout-container" >
                 <Header className={`port-nav-${headerType}`} isAuthenticated={isAuthenticated} user={user} />
