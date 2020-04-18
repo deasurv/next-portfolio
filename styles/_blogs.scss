@@ -176,3 +176,21 @@
         }
     }
 }
+
+/* Blog editor page */
+
+.blog-editor-page{
+    .editor-wrapper{
+        @media only screen and (min-width: 991.98px){
+            padding: 0 180px;
+        }
+    }
+
+    blockquote{
+        display: block;
+        color: #999;
+        font-style: italic;
+        border-left: 1px solid #ccc;
+        padding-left: 10px;
+    }
+}
