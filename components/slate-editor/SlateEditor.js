@@ -5,6 +5,7 @@ import { initialValue } from './initialValue';
 
 import { renderMark, renderNode } from './renderers';
 import HoverMenu from './HoverMenu';
+import ControlMenu from './ControlMenu';
 
 class SlateEditor extends Component{
     
@@ -47,6 +48,24 @@ class SlateEditor extends Component{
         menu.style.left = `${rect.left + window.pageXOffset - menu.offsetWidth / 2 + rect.width / 2}px`;
     }
 
+    getTitle(){
+        const { value } = this.state,
+            firstBlock = value.document.getBlocks().get(0),
+            secondBlock = value.document.getBlocks().get(1);
+
+        const title = firstBlock && firstBlock.text ? firstBlock.text : 'No title';
+        const subtitle = secondBlock && secondBlock.text ? secondBlock.text : 'No subtitle';
+
+        return { title, subtitle };
+    }
+
+    save = () => {
+        const { save } = this.props;
+        const headingValues = this.getTitle();
+
+        save(headingValues);
+    }
+
     render(){
         const { value, isLoaded } = this.state;
         return(
@@ -59,6 +78,7 @@ class SlateEditor extends Component{
                         renderMark={renderMark}
                         renderNode={renderNode}
                         renderEditor={this.renderEditor}
+                        {...this.props}
                     />
                 }
             </Fragment>
@@ -67,12 +87,14 @@ class SlateEditor extends Component{
 
     renderEditor = (props, editor, next) => {
         const children = next();
-
+        const { isSaving } = props;
+        
         return (
-          <Fragment>
-            {children}
-            <HoverMenu innerRef={menu => this.menu = menu} editor={editor} />
-          </Fragment>
+            <Fragment>
+                <ControlMenu save={this.save} isSaving={isSaving}></ControlMenu>
+                {children}
+                <HoverMenu innerRef={menu => this.menu = menu} editor={editor} />
+            </Fragment>
         )
     }
 }
