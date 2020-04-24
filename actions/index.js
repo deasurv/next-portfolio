@@ -14,7 +14,8 @@ const setAuthHeader = (req) => {
 };
 
 export const getSecretData = async (req) => {
-    return await axiosInstance.get('/secret', setAuthHeader(req)).then(res => res.data);
+    return await axiosInstance.get('/secret', setAuthHeader(req))
+        .then(res => res.data);
 }
 
 const rejectPromise = (responseError) => {
@@ -30,34 +31,34 @@ const rejectPromise = (responseError) => {
 };
 
 export const getPortfolios = async () => {
-    return await axiosInstance.get('/portfolios').then(res => res.data);
+    return await axiosInstance.get('/portfolios')
+        .then(res => res.data);
 };
 
 export const getPortfolioByID = async (id) => {
-    return await axiosInstance.get(`/portfolios/${id}`).then(res => res.data);
+    return await axiosInstance.get(`/portfolios/${id}`)
+        .then(res => res.data);
 };
 
 export const createPortfolio = async (portfolioData) => {
     return await axiosInstance.post('/portfolios', portfolioData, setAuthHeader())
-    .then(res => res.data)
-    .catch(error => rejectPromise(error))
+        .then(res => res.data)
+        .catch(error => rejectPromise(error))
 };
 
 export const updatePortfolio = async (portfolioData) => {
     return await axiosInstance.patch(`/portfolios/${portfolioData._id}`, portfolioData, setAuthHeader())
-    .then(res => res.data)
-    .catch(error => rejectPromise(error))
+        .then(res => res.data)
+        .catch(error => rejectPromise(error))
 };
 
 export const deletePortfolio = async (portfolioID) => {
     return await axiosInstance.delete(`/portfolios/${portfolioID}`, setAuthHeader())
-    .then(res => res.data);
+        .then(res => res.data);
 };
 
-export const saveBlog = async (blogData) => {
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            resolve('Promise resolved!')
-        }, 1000);
-    })
+export const createBlog = async (blogData) => {
+    return axiosInstance.post('/blogs', blogData, setAuthHeader())
+        .then(response => response.data)
+        .catch(err => rejectPromise(err));
 };

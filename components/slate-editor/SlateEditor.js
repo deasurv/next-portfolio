@@ -1,11 +1,16 @@
 import React, { Component, Fragment } from 'react';
 import { Editor } from 'slate-react';
 
+import Html from 'slate-html-serializer';
+import { rules } from './rules';
+
 import { initialValue } from './initialValue';
 
 import { renderMark, renderNode } from './renderers';
 import HoverMenu from './HoverMenu';
 import ControlMenu from './ControlMenu';
+
+const html = new Html({ rules });
 
 class SlateEditor extends Component{
     
@@ -60,10 +65,12 @@ class SlateEditor extends Component{
     }
 
     save = () => {
-        const { save } = this.props;
+        const { value } = this.state;
+        const { save, isSaving } = this.props;
         const headingValues = this.getTitle();
+        const text = html.serialize(value);
 
-        save(headingValues);
+        !isSaving && save(headingValues, text);
     }
 
     render(){

@@ -7,7 +7,7 @@ import withAuth from './../components/hoc/withAuth';
 
 import SlateEditor from './../components/slate-editor/SlateEditor';
 
-import { saveBlog } from './../actions';
+import { createBlog } from './../actions';
 
 class BlogEditor extends Component{
 
@@ -20,23 +20,23 @@ class BlogEditor extends Component{
         };
     }
     
-    saveBlog = (heading) => {
+    createBlog = (heading, story) => {
         const blog = {};
-        blog.title = heading.title;
-        blog.subtitle = heading.subtitle;
+        //blog.title = heading.title;
+        //blog.subtitle = heading.subtitle;
+        blog.story = story;
 
         this.setState({
             isSaving: true
         });
 
-        saveBlog().then(data => {
-            this.setState({
-                isSaving: false
-            });
-            console.log(data);
+        createBlog(blog).then(data => {
+            this.setState({ isSaving: false });
+        }).catch(err => {
+            this.setState({ isSaving: false });
+            const message = err.message || 'Server Error!';
+            console.error(message);
         });
-        console.log('SaveBlog');
-        console.log(blog);
     }
 
     render(){
@@ -45,7 +45,7 @@ class BlogEditor extends Component{
         return(
             <BaseLayout {...this.props.auth}>
                 <BasePage containerClass="editor-wrapper" className="blog-editor-page" title="Write your story...">
-                    <SlateEditor isSaving={isSaving} save={this.saveBlog} />
+                    <SlateEditor isSaving={isSaving} save={this.createBlog} />
                 </BasePage>
             </BaseLayout>
         );
