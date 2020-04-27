@@ -1,4 +1,8 @@
 const Blog = require('./../models/blog');
+
+const AsyncLock = require('async-lock');
+const lock = new AsyncLock();
+
 /* 
 exports.getPortfolios = (req, res) => {
 
@@ -28,20 +32,36 @@ exports.getBlogByID = (req, res) => {
 };
 
 exports.createBlog = (req, res) => {
-    const blogData = req.body;
-    const blog = new Blog(blogData);
-    if(req.user){
-        const { user } = req;
-        blog.userID = user.sub;
-        blog.author = user.name;
-    }
+    const { lockID } = req.query;
 
-    blog.save((error, createdBlog) => {
-        if(error){
-            return res.status(422).send(error);
-        }
-        return res.json(createdBlog);
-    });
+    if(!lock.isBusy(lockID)){
+        lock.acquire(lockID, done => {
+            const blogData = req.body;
+            const blog = new Blog(blogData);
+    
+            if(req.user){
+                const { user } = req;
+                blog.userID = user.sub;
+                blog.author = user.name;
+            }
+        
+            blog.save((error, createdBlog) => {
+                setTimeout(() => done(), 5000);
+    
+                if(error){
+                    return res.status(422).send(error);
+                }
+                return res.json(createdBlog);
+            });
+        }, (err, ret) => {
+            err && console.error(err);
+        });
+    } else {
+        return res.status(422).send({
+            status: 422,
+            message: 'Blog is saving'
+        });
+    }
 };
 
 /* 

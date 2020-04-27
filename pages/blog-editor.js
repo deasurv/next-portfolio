@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import BaseLayout from './../components/layouts/BaseLayout';
 import BasePage from './../components/BasePage';
 
+import { Router } from './../routes';
 import withAuth from './../components/hoc/withAuth';
 
 import SlateEditor from './../components/slate-editor/SlateEditor';
@@ -16,22 +17,25 @@ class BlogEditor extends Component{
         super(props);
 
         this.state = {
-            isSaving: false
+            isSaving: false,
+            lockID: Math.floor(1000 + Math.random() * 9000)
         };
     }
     
     createBlog = (heading, story) => {
+        const { lockID } = this.state;
         const blog = {};
-        //blog.title = heading.title;
-        //blog.subtitle = heading.subtitle;
+        blog.title = heading.title;
+        blog.subtitle = heading.subtitle;
         blog.story = story;
 
         this.setState({
             isSaving: true
         });
 
-        createBlog(blog).then(data => {
+        createBlog(blog, lockID).then(createdBlog => {
             this.setState({ isSaving: false });
+            Router.pushRoute(`/blogs/${createdBlog._id}/edit`);
         }).catch(err => {
             this.setState({ isSaving: false });
             const message = err.message || 'Server Error!';

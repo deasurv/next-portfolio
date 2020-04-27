@@ -9,18 +9,22 @@ import { initialValue } from './initialValue';
 import { renderMark, renderNode } from './renderers';
 import HoverMenu from './HoverMenu';
 import ControlMenu from './ControlMenu';
+import { Value } from 'slate';
 
 const html = new Html({ rules });
 
 class SlateEditor extends Component{
     
     state = {
-        value: initialValue,
+        value: Value.create(),
         isLoaded: false
     }
 
     componentDidMount(){
-        this.setState({ isLoaded: true });
+        const valueFromProps = this.props.initialValue;
+        const value = valueFromProps ? Value.fromJSON(html.deserialize(valueFromProps)) : Value.fromJSON(initialValue);
+
+        this.setState({ isLoaded: true, value });
         this.updateMenu();
     }
 
