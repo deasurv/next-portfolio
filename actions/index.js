@@ -63,6 +63,12 @@ export const createBlog = async (blogData, lockID) => {
         .catch(err => rejectPromise(err));
 };
 
+export const updateBlog = async (blogData) => {
+    return axiosInstance.patch(`/blogs/${blogData._id}`, blogData, setAuthHeader())
+        .then(response => response.data)
+        .catch(err => rejectPromise(err));
+};
+
 export const getBlogByID = async (id) => {
     return await axiosInstance.get(`/blogs/${id}`)
         .then(res => res.data);

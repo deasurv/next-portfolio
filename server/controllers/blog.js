@@ -63,27 +63,28 @@ exports.createBlog = (req, res) => {
         });
     }
 };
+ 
+exports.updateBlog = (req, res) =>{
+    const blogID = req.params.id;
+    const blogData = req.body;
 
-/* 
-exports.updatePortfolio = (req, res) =>{
-    const portfolioID = req.params.id;
-    const portfolioData = req.body;
-
-    Portfolio.findById(portfolioID, (error, foundPortfolio) => {
+    Blog.findById(blogID, (error, foundBlog) => {
         if(error){
             return res.status(422).send(error);
         }
 
-        foundPortfolio.set(portfolioData);
-        foundPortfolio.save((error, savedPortfolio) => {
+        foundBlog.set(blogData);
+        foundBlog.updatedAt = new Date();
+        foundBlog.save((error, savedBlog) => {
             if(error){
                 return res.status(422).send(error);
             }
-            return res.json(savedPortfolio);
+            return res.json(savedBlog);
         })
     });
 };
 
+/*
 exports.deletePortfolio = (req, res) => {
     const portfolioID = req.params.id;
 

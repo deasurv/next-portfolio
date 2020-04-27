@@ -8,4 +8,6 @@ router.get('/:id', blogController.getBlogByID);
 
 router.post('', authService.checkJWT, authService.checkRole('siteOwner'), blogController.createBlog);
 
+router.patch('/:id', authService.checkJWT, authService.checkRole('siteOwner'), blogController.updateBlog);
+
 module.exports = router;
