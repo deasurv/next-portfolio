@@ -36,6 +36,18 @@ class SlateEditor extends Component{
         this.setState({ value });
     }
 
+    onKeyDown = (event, change, next) => {
+        const { isLoading } = this.props;
+
+        if(!isLoading && event.which === 83 && (event.ctrlKey || event.metaKey)){
+            event.preventDefault();
+            this.save();
+            return;
+        }
+
+        next();
+    }
+
     updateMenu = () => {
         const menu = this.menu;
         if (!menu) return;
@@ -86,6 +98,7 @@ class SlateEditor extends Component{
                         placeholder="Enter some text..."
                         value={value}
                         onChange={this.onChange}
+                        onKeyDown={this.onKeyDown}
                         renderMark={renderMark}
                         renderNode={renderNode}
                         renderEditor={this.renderEditor}
