@@ -67,99 +67,6 @@
         }
     }
 
-    .masthead {
-        // TIP: Background images are set within the HTML using inline CSS!
-        background: no-repeat center center;
-        background-color: $gray-600;
-        background-attachment: scroll;
-        position: relative;
-        @include background-cover;
-
-        .overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 100%;
-            width: 100%;
-            background-color: $gray-900;
-            opacity: 0.5;
-        }
-
-        .page-heading,
-        .post-heading,
-        .site-heading {
-            padding: 200px 0 150px;
-            color: white;
-
-            @media only screen and (min-width: 768px) {
-                padding: 200px 0;
-            }
-        }
-
-        .page-heading,
-        .site-heading {
-            text-align: center;
-
-            h1 {
-                font-size: 50px;
-                margin-top: 0;
-                font-weight: 700;
-            }
-
-            .subheading {
-                font-size: 24px;
-                font-weight: 300;
-                line-height: 1.1;
-                display: block;
-                margin: 10px 0 0;
-            }
-
-            @media only screen and (min-width: 768px) {
-                h1 {
-                    font-size: 80px;
-                }
-            }
-        }
-
-        .post-heading {
-            h1 {
-                font-size: 35px;
-            }
-
-            .meta,
-            .subheading {
-                line-height: 1.1;
-                display: block;
-            }
-
-            .subheading {
-                font-size: 24px;
-                font-weight: 600;
-                margin: 10px 0 30px;
-            }
-
-            .meta {
-                font-size: 20px;
-                font-weight: 300;
-                font-style: italic;
-
-                a {
-                    color: $white;
-                }
-            }
-
-            @media only screen and (min-width: 768px) {
-                h1 {
-                    font-size: 55px;
-                }
-
-                .subheading {
-                    font-size: 30px;
-                }
-            }
-        }
-    }
-
     // Styling for the footer
     footer {
         padding: 50px 0 65px;
@@ -173,6 +80,99 @@
             font-size: 14px;
             margin-bottom: 0;
             text-align: center;
+        }
+    }
+}
+
+.masthead {
+    // TIP: Background images are set within the HTML using inline CSS!
+    background: no-repeat center center;
+    background-color: $gray-600;
+    background-attachment: scroll;
+    position: relative;
+    @include background-cover;
+
+    .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background-color: $gray-900;
+        opacity: 0.5;
+    }
+
+    .page-heading,
+    .post-heading,
+    .site-heading {
+        padding: 200px 0 150px;
+        color: white;
+
+        @media only screen and (min-width: 768px) {
+            padding: 200px 0;
+        }
+    }
+
+    .page-heading,
+    .site-heading {
+        text-align: center;
+
+        h1 {
+            font-size: 50px;
+            margin-top: 0;
+            font-weight: 700;
+        }
+
+        .subheading {
+            font-size: 24px;
+            font-weight: 300;
+            line-height: 1.1;
+            display: block;
+            margin: 10px 0 0;
+        }
+
+        @media only screen and (min-width: 768px) {
+            h1 {
+                font-size: 80px;
+            }
+        }
+    }
+
+    .post-heading {
+        h1 {
+            font-size: 35px;
+        }
+
+        .meta,
+        .subheading {
+            line-height: 1.1;
+            display: block;
+        }
+
+        .subheading {
+            font-size: 24px;
+            font-weight: 600;
+            margin: 10px 0 30px;
+        }
+
+        .meta {
+            font-size: 20px;
+            font-weight: 300;
+            font-style: italic;
+
+            a {
+                color: $white;
+            }
+        }
+
+        @media only screen and (min-width: 768px) {
+            h1 {
+                font-size: 55px;
+            }
+
+            .subheading {
+                font-size: 30px;
+            }
         }
     }
 }
@@ -192,5 +192,23 @@
         font-style: italic;
         border-left: 1px solid #ccc;
         padding-left: 10px;
+    }
+}
+
+.blog-user-page{
+    .user-blog-list{
+        list-style: none;
+        padding: 0;
+
+        > li{
+            font-size: 20px;
+            > a {
+                color: #999;
+            }
+        }
+    }
+
+    .blog-status-title{
+        font-weight: bold;
     }
 }

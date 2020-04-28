@@ -3,20 +3,17 @@ const Blog = require('./../models/blog');
 const AsyncLock = require('async-lock');
 const lock = new AsyncLock();
 
-/* 
-exports.getPortfolios = (req, res) => {
+exports.getUserBlogs = (req, res) => {
+    const userID = req.user.sub;
 
-    Portfolio.find({})
-        .sort({'startDate': 1})
-        .exec((error, allPortfolios) => {
-            if(error){
-                return res.status(422).send(error);
-            }
-            return res.json(allPortfolios);
-        });
+    Blog.find({userID}, (error, userBlogs) => {
+        if(error){
+            return res.status(422).send(error);
+        }
+
+        return res.json(userBlogs);
+    });
 };
-
-*/
 
 exports.getBlogByID = (req, res) => {
     const blogID = req.params.id;

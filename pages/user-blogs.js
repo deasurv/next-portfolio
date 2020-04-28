@@ -1,0 +1,91 @@
+import React, { Component } from 'react';
+
+import BaseLayout from './../components/layouts/BaseLayout';
+import BasePage from './../components/BasePage';
+
+import withAuth from './../components/hoc/withAuth';
+import { Link } from './../routes';
+
+import { getUserBlogs } from './../actions';
+
+import { Container, Row, Col } from 'reactstrap';
+
+class UserBlogs extends Component{
+
+    static async getInitialProps({ req }){
+        let blogs = [];
+
+        try{
+            blogs = await getUserBlogs(req);
+        } catch(err){
+            console.log(err);
+        }
+
+        return { blogs };
+    }
+
+    separateBlogs(blogs){
+        const published = [];
+        const drafts = [];
+
+        blogs.forEach(blog => {
+            blog.status === 'draft' ? drafts.push(blog) : published.push(blog);
+        });
+
+        return { published, drafts};
+    }
+
+    renderBlog(blog, index){
+        return (
+            <li key={index}>
+                <Link route={`/blogs/${blog._id}/edit`}>
+                    <a>{blog.title}</a>
+                </Link>
+            </li>
+        );
+    }
+
+    renderBlogs(blogs){
+        return (
+            <ul className="user-blog-list">
+                { blogs.map((blog, index) => this.renderBlog(blog, index)) }
+            </ul>
+        )
+    }
+
+    render(){
+        const { blogs } = this.props;
+        const { published, drafts } = this.separateBlogs(blogs);
+        return(
+            <BaseLayout {...this.props.auth} headerType={'landing'} className="blog-user-page">
+                <div className="masthead" style={{ "backgroundImage": "url('/static/images/home-bg.jpg')" }}>
+                    <div className="overlay"></div>
+                    <Container>
+                        <div className="row">
+                            <div className="col-lg-8 col-md-10 mx-auto">
+                                <div className="site-heading">
+                                    <h1>Fresh Blogs</h1>
+                                    <span className="subheading">Programming, travelling...</span>
+                                </div>
+                            </div>
+                        </div>
+                    </Container>
+                </div>
+                <BasePage className="blog-body">
+                    <Row>
+                        <Col md="6" className="mx-auto text-center">
+                            <h3 className="blog-status-title">Published Blogs</h3>
+                            { this.renderBlogs(published) }
+                        </Col>
+                        <Col md="6" className="mx-auto text-center">
+                            <h3 className="blog-status-title">Draft Blogs</h3>
+                            { this.renderBlogs(drafts) }
+                        </Col>
+                    </Row>
+                </BasePage>
+            </BaseLayout>
+        );
+    }
+}
+
+export default withAuth('siteOwner')(UserBlogs);

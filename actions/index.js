@@ -57,6 +57,11 @@ export const deletePortfolio = async (portfolioID) => {
         .then(res => res.data);
 };
 
+export const getUserBlogs = async (req) => {
+    return await axiosInstance.get('/blogs/me', setAuthHeader(req))
+        .then(res => res.data);
+};
+
 export const createBlog = async (blogData, lockID) => {
     return axiosInstance.post(`/blogs?lockID=${lockID}`, blogData, setAuthHeader())
         .then(response => response.data)

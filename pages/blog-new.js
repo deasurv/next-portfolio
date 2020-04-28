@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import BaseLayout from './../components/layouts/BaseLayout';
 import BasePage from './../components/BasePage';
 
+import { toast } from 'react-toastify';
+
 import { Router } from './../routes';
 import withAuth from './../components/hoc/withAuth';
 
@@ -34,11 +36,13 @@ class BlogEditor extends Component{
         });
 
         createBlog(blog, lockID).then(createdBlog => {
+            toast.success('Blog created successfully!');
             this.setState({ isSaving: false });
             Router.pushRoute(`/blogs/${createdBlog._id}/edit`);
         }).catch(err => {
             this.setState({ isSaving: false });
             const message = err.message || 'Server Error!';
+            toast.error(message);
             console.error(message);
         });
     }
