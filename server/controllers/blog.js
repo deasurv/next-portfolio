@@ -3,6 +3,8 @@ const Blog = require('./../models/blog');
 const AsyncLock = require('async-lock');
 const lock = new AsyncLock();
 
+const slugify = require('slugify');
+
 exports.getUserBlogs = (req, res) => {
     const userID = req.user.sub;
 
@@ -69,6 +71,15 @@ exports.updateBlog = (req, res) =>{
         if(error){
             return res.status(422).send(error);
         }
+
+        if(blogData.status && blogData.status === 'published' && !foundBlog.slug){
+            foundBlog.slug = slugify(foundBlog.title, {
+                replacement: '-',
+                remove: null,
+                lower: true,
+            });
+        }
+
 
         foundBlog.set(blogData);
         foundBlog.updatedAt = new Date();
