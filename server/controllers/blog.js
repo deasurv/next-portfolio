@@ -5,6 +5,17 @@ const lock = new AsyncLock();
 
 const slugify = require('slugify');
 
+exports.getPublishedBlogs = (req, res) => {
+
+    Blog.find({status: 'published'}, (err, publishedBlogs) => {
+        if(err){
+            return res.status(422).send(err);
+        }
+
+        return res.json({publishedBlogs});
+    });
+};
+
 exports.getUserBlogs = (req, res) => {
     const userID = req.user.sub;
 
@@ -92,18 +103,17 @@ exports.updateBlog = (req, res) =>{
     });
 };
 
-/*
-exports.deletePortfolio = (req, res) => {
-    const portfolioID = req.params.id;
+exports.deleteBlog = (req, res) => {
+    const blogID = req.params.id;
 
-    Portfolio.deleteOne({_id: portfolioID}, (error, deletedPortfolio) => {
+    Blog.deleteOne({_id: blogID}, (error, deletedBlog) => {
         if(error){
             return res.status(422).send(error);
         }
+
         return res.json({
             status: 1,
-            details: 'portfolio deleted!'
+            details: 'blog deleted!'
         }); 
     });
 };
- */

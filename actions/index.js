@@ -78,3 +78,9 @@ export const getBlogByID = async (id) => {
     return await axiosInstance.get(`/blogs/${id}`)
         .then(res => res.data);
 };
+
+export const deleteBlog = async (blogID) => {
+    return await axiosInstance.delete(`/blogs/${blogID}`, setAuthHeader())
+        .then(res => res.data)
+        .catch(err => rejectPromise(err));
+};
