@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 import Cookies from 'js-cookie';
-import { getCookieFromRequest } from './../helpers/util';
+import { getCookieFromRequest } from './../helpers/utils';
 
 const axiosInstance = axios.create({
     baseURL: 'http://localhost:3000/api/v1',
@@ -83,4 +83,13 @@ export const deleteBlog = async (blogID) => {
     return await axiosInstance.delete(`/blogs/${blogID}`, setAuthHeader())
         .then(res => res.data)
         .catch(err => rejectPromise(err));
+};
+
+export const getPublishedBlogs = async (req) => {
+    return await axiosInstance.get('/blogs').then(res => res.data);
+};
+
+export const getBlogBySlug = async (slug) => {
+    return await axiosInstance.get(`/blogs/s/${slug}`)
+        .then(res => res.data);
 };

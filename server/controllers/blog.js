@@ -7,12 +7,26 @@ const slugify = require('slugify');
 
 exports.getPublishedBlogs = (req, res) => {
 
-    Blog.find({status: 'published'}, (err, publishedBlogs) => {
-        if(err){
-            return res.status(422).send(err);
+    Blog.find({status: 'published'})
+        .sort({'createdAt': -1})
+        .exec((err, publishedBlogs) => {
+            if(err){
+                return res.status(422).send(err);
+            }
+
+            return res.json(publishedBlogs);
+    });
+};
+
+exports.getBlogBySlug = (req, res) => {
+    const slug = req.params.slug;
+
+    Blog.findOne({slug}, (error, foundBlog) => {
+        if(error){
+            return res.status(422).send(error);
         }
 
-        return res.json({publishedBlogs});
+        return res.json(foundBlog);
     });
 };
 

@@ -3,7 +3,7 @@ import Cookies from 'js-cookie';
 import jwt from 'jsonwebtoken';
 import axios from 'axios';
 
-import { getCookieFromRequest } from './../helpers/util';
+import { getCookieFromRequest } from './../helpers/utils';
 class Auth0{
 
     constructor(){

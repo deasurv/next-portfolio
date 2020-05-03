@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import BaseLayout from './../components/layouts/BaseLayout';
 import BasePage from './../components/BasePage';
 
+import { Button } from 'reactstrap';
+
 import withAuth from './../components/hoc/withAuth';
 import { Router, Link } from './../routes';
 
@@ -105,8 +107,8 @@ class UserBlogs extends Component{
                         <div className="row">
                             <div className="col-lg-8 col-md-10 mx-auto">
                                 <div className="site-heading">
-                                    <h1>Fresh Blogs</h1>
-                                    <span className="subheading">Programming, travelling...</span>
+                                    <h1>Blog Dashboard</h1>
+                                    <span className="subheading">Let's <Link route='/blogs/new'><Button color="primary">Create new story</Button></Link></span>
                                 </div>
                             </div>
                         </div>
