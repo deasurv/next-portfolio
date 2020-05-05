@@ -58,3 +58,12 @@
     background-color: $secondary !important;
     padding: 30px;
 }
+
+.bg-transparent.menu-open{
+    background-color: #2c3e50 !important;
+    transition: .5s;
+}
+
+.bg-transparent.menu-close{
+    transition: .5s;
+}

@@ -7,8 +7,8 @@
 @import './blogs';
 @import './about';
 
-@import './header';
-@import './slate-editor';
+@import './shared/header';
+@import './shared/slate-editor';
 
 html, body {
     height:100%;

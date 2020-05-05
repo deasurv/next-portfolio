@@ -4,7 +4,7 @@ import Header from './../shared/Header';
 import Head from 'next/head';
 
 const BaseLayout = (props) => {
-    const { children, className, isAuthenticated, user } = props;
+    const { children, className, isAuthenticated, user, isSiteOwner } = props;
     const headerType = props.headerType || 'default';
     
     return(
@@ -15,7 +15,7 @@ const BaseLayout = (props) => {
                 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
             </Head>
             <div className="layout-container" >
-                <Header className={`port-nav-${headerType}`} isAuthenticated={isAuthenticated} user={user} />
+                <Header className={`port-nav-${headerType}`} isAuthenticated={isAuthenticated} isSiteOwner={isSiteOwner} user={user} />
                 <main className={`cover ${className}`}>
                     <div className="wrapper">
                         {children}
