@@ -1,15 +1,21 @@
 import React, { Component } from 'react';
+
 import Link from 'next/link';
+import ActiveLink from './../ActiveLink';
+
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
 
 import auth0 from './../../services/auth0';
 
 const BootstrapNavLink = (props) => {
     const { route, title } = props;
+    const className = props.className || '';
 
     return(
-        <Link href={route}><a className="nav-link port-navbar-link">{title}</a></Link>
-    )
+        <ActiveLink route={route} activeClassName="active">
+            <a className={`nav-link port-navbar-link ${className}`}>{title}</a>
+        </ActiveLink>
+    );
 };
 
 const Login = () => {

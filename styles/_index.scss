@@ -119,3 +119,34 @@
     font-weight: bold;
     letter-spacing: .25rem;
 }
+
+.cover-1 {
+    background-image: linear-gradient(45deg, rgb(253, 157, 97),  rgb(243, 125, 73));
+}
+
+.flipper {
+    transition: 1s;
+    transform-style: preserve-3d;
+    position: relative;
+}
+
+
+.flipper.is-flipping {
+    transform: rotateY(-180deg);
+}
+
+.front, .back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    backface-visibility: hidden;
+}
+
+.front{
+    transform: rotateY(0deg);
+    z-index: 9999;
+}
+
+.back{
+    transform: rotateY(180deg);
+}
