@@ -47,11 +47,16 @@
     max-width: 100%;
 }
   
-.hero-welcome-text > h1 {
+.hero-welcome-text > p{
     color: white;
     text-transform: uppercase;
     font-size: 27px;
     margin-top: 80px;
+
+    > h1{
+        font-size: inherit;
+        display: inline;
+    }
 }
   
 .hero-welcome-bio {
@@ -83,7 +88,7 @@
         }
     }
 
-    .hero-welcome-text > h1 {
+    .hero-welcome-text > p {
         margin-top: 0px;
     }
 }

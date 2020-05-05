@@ -1,6 +1,7 @@
 const routes = require('next-routes');
 
 module.exports = routes()
+    .add('portfolio-new', '/portfolios/new')
     .add('portfolio', '/portfolio/:id')
     .add('portfolio-edit', '/portfolios/:id/edit')
     .add('user-blogs', '/blogs/dashboard')

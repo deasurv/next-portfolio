@@ -37,7 +37,7 @@ class index extends Component{
         const { isFlipping } = this.state;
 
         return(
-            <BaseLayout className={`cover ${isFlipping && 'cover-1'}`} {...this.props.auth} headerType="index">
+            <BaseLayout className={`cover ${isFlipping && 'cover-1'}`} {...this.props.auth} headerType="index" title="Majid Fatahi - Portfolio">
                 <div className="main-section">
                     <div className="background-image">
                         <img src="/static/images/background-index.png" />
@@ -53,7 +53,7 @@ class index extends Component{
                                                 <h2> Front-end Web Developer </h2>
                                                 <div className="hero-section-content-intro">Have a look at my portfolio and job history.</div>
                                             </div>
-                                            <img className="image" src="/static/images/section-1.png" />
+                                            <img className="image" src="/static/images/section-1.png" alt="Web developer"/>
                                             <div className="shadow-custom">
                                                 <div className="shadow-inner"> </div>
                                             </div>
@@ -63,7 +63,7 @@ class index extends Component{
                                                 <h2> Get your projects done! </h2>
                                                 <div className="hero-section-content-intro">Top quality in web development!</div>
                                             </div>
-                                            <img className="image" src="/static/images/section-2.png" />
+                                            <img className="image" src="/static/images/section-2.png" alt="Web developer"/>
                                             <div className="shadow-custom shadow-custom-2">
                                                 <div className="shadow-inner"> </div>
                                             </div>
@@ -73,7 +73,7 @@ class index extends Component{
                             </Col>
                             <Col md="6" className="hero-welcome-wrapper">
                                 <div className="hero-welcome-text">
-                                    <h1>Welcome to the portfolio website of Majid Fatahi. Get informed, collaborate and discover projects I was working on through the years!</h1>
+                                    <p>Welcome to the <h1>portfolio website of Majid Fatahi</h1>. Get informed, collaborate and discover projects I was working on through the years!</p>
                                 </div>
                                 <Typed
                                     className="self-typed"
@@ -87,7 +87,7 @@ class index extends Component{
                                     cursorChar=" _"
                                 />
                                 <div className="hero-welcome-bio">
-                                    <h1>Let's take a look on my work.</h1>
+                                    <h2>Let's take a look on my work.</h2>
                                 </div>
                             </Col>
                         </Row>

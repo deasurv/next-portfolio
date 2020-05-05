@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /portfolios/new
+Disallow: /portfolios/*/edit
+Disallow: /blogs/new
+Disallow: /blogs/*/edit

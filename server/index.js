@@ -1,5 +1,8 @@
 const express = require('express');
 const next = require('next');
+
+const path = require('path');
+
 const mongoose = require('mongoose');
 const routes = require('./../routes');
 const authService = require('./services/auth');
@@ -23,6 +26,13 @@ mongoose.connect(config.DB_URI, { useNewUrlParser: true })
         .then(() => console.log('Database connected!'))
         .catch(error => console.log(error));
 
+const robotsOptions = {
+    root: path.join(__dirname, '../static'),
+    headers: {
+        'Content-Type': 'text/plain;charset=UTF-8'
+    }
+};
+
 app.prepare()
 .then(() => {
     const server = express();
@@ -32,6 +42,9 @@ app.prepare()
     server.use('/api/v1/portfolios', portfolioRoutes);
     server.use('/api/v1/blogs', blogRoutes);
 
+    server.get('/robots.txt', (req, res) => {
+        return res.status(200).sendFile('robots.txt', robotsOptions);
+    });
 
 
 

@@ -77,10 +77,10 @@ class portfolios extends Component{
         const { isAuthenticated, isSiteOwner } = this.props.auth;
         
         return(
-            <BaseLayout {...this.props.auth}>
+            <BaseLayout {...this.props.auth} title="Majid Fatahi - Portfolios and skills">
                 <BasePage className="portfolio-page" title="Portfolios page">
                     { isAuthenticated && isSiteOwner &&
-                        <Button className="create-portfolio-btn" color="success" onClick={() => Router.pushRoute('/portfolio-new')}>Create new Portfolio</Button>
+                        <Button className="create-portfolio-btn" color="success" onClick={() => Router.pushRoute('/portfolios/new')}>Create new Portfolio</Button>
                     }
                     { this.renderPortfolios(portfolios) }
                 </BasePage>
