@@ -118,6 +118,10 @@ class SlateEditor extends Component{
                 <ControlMenu save={this.save} isSaving={isSaving}></ControlMenu>
                 {children}
                 <HoverMenu innerRef={menu => this.menu = menu} editor={editor} />
+                <style jsx>{`
+                    @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+                `}
+                </style>
             </Fragment>
         )
     }

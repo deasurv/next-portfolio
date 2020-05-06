@@ -73,7 +73,7 @@ class index extends Component{
                             </Col>
                             <Col md="6" className="hero-welcome-wrapper">
                                 <div className="hero-welcome-text">
-                                    <p>Welcome to the <h1>portfolio website of Majid Fatahi</h1>. Get informed, collaborate and discover projects I was working on through the years!</p>
+                                    <h1>Welcome to the portfolio website of Majid Fatahi. Get informed, collaborate and discover projects I was working on through the years!</h1>
                                 </div>
                                 <Typed
                                     className="self-typed"

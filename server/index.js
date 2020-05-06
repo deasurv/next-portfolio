@@ -1,5 +1,6 @@
 const express = require('express');
 const next = require('next');
+const compression = require('compression');
 
 const path = require('path');
 
@@ -24,7 +25,7 @@ const secretData = [
 
 mongoose.connect(config.DB_URI, { useNewUrlParser: true })
         .then(() => console.log('Database connected!'))
-        .catch(error => console.log(error));
+        .catch(error => console.error(error));
 
 const robotsOptions = {
     root: path.join(__dirname, '../static'),
@@ -36,6 +37,7 @@ const robotsOptions = {
 app.prepare()
 .then(() => {
     const server = express();
+    server.use(compression());
     server.use(bodyParser.json());
 
     server.use('/api/v1/books', bookRoutes);
@@ -45,11 +47,6 @@ app.prepare()
     server.get('/robots.txt', (req, res) => {
         return res.status(200).sendFile('robots.txt', robotsOptions);
     });
-
-
-
-
-
 
     server.get('/api/v1/secret', authService.checkJWT, (req, res) => {
         return res.json(secretData);
@@ -72,7 +69,9 @@ app.prepare()
         }
     });
 
-    server.use(handle).listen(3000, (err) => {
+    const PORT = process.env.PORT || 3000;
+
+    server.use(handle).listen(PORT, (err) => {
         if(err) throw err;
         console.log('> Ready on http://localhost:3000');
     });

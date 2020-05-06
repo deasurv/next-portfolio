@@ -17,8 +17,6 @@ class Secret extends Component{
         const someVar = 'some value';
         const anotherSecretData = await getSecretData(req)
 
-        console.log(anotherSecretData);
-
         return { someVar };
     }
 

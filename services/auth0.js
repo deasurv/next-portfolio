@@ -4,13 +4,16 @@ import jwt from 'jsonwebtoken';
 import axios from 'axios';
 
 import { getCookieFromRequest } from './../helpers/utils';
+
+const { CLIENT_ID } = process.env;
+
 class Auth0{
 
     constructor(){
         this.auth0 = new auth0.WebAuth({
             domain: 'deasurv.auth0.com',
-            clientID: 'pjMBkDAMj5vLW4iFexJLfRSfJbRGgI44',
-            redirectUri: 'http://localhost:3000/callback',
+            clientID: CLIENT_ID,
+            redirectUri: `${process.env.BASE_URL}/callback`,
             responseType: 'token id_token',
             scope: 'openid profile'
         });
@@ -28,7 +31,7 @@ class Auth0{
                     resolve();
                 } else if(error){
                     reject(error);
-                    console.log(error);
+                    console.error(error);
                 }
             });
         });
@@ -36,9 +39,7 @@ class Auth0{
 
     setSession(result){
         const expiresAt = JSON.stringify((result.expiresIn * 1000) + new Date().getTime());
-        Cookies.set('user', result.idTokenPayload);
         Cookies.set('jwt', result.idToken);
-        Cookies.set('expiresAt', expiresAt);
     }
 
     login(){
@@ -46,13 +47,11 @@ class Auth0{
     }
 
     logout(){
-        Cookies.remove('user');
         Cookies.remove('jwt');
-        Cookies.remove('expiresAt');
 
         this.auth0.logout({
-            returnTo: '',
-            clientID: 'pjMBkDAMj5vLW4iFexJLfRSfJbRGgI44'
+            returnTo: process.env.BASE_URL,
+            clientID: CLIENT_ID
         })
     }
 

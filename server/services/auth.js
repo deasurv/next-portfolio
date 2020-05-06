@@ -1,13 +1,14 @@
 const jwt = require('express-jwt');
 const jwksRSA = require('jwks-rsa');
 
-const namespace = 'http://localhost:3000/';
+const config = require('./../config');
+const { NAMESPACE } = config;
 
 exports.checkJWT = jwt({
     secret: jwksRSA.expressJwtSecret({
         cache: true,
         rateLimit: true,
-        jwksRequestsPerMinute: 15,
+        jwksRequestsPerMinute: 50,
         jwksUri: 'https://deasurv.auth0.com/.well-known/jwks.json'
     }),
     audience: 'pjMBkDAMj5vLW4iFexJLfRSfJbRGgI44',
@@ -19,7 +20,7 @@ exports.checkRole = role =>
     (req, res, next) => {
         const user = req.user;
 
-        if(user && (user[`${namespace}roles`] === role)){
+        if(user && user[`${NAMESPACE}/roles`] && (user[`${NAMESPACE}/roles`] === role)){
             next();
         } else {
             return res.status(401).send({

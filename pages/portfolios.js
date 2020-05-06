@@ -15,7 +15,7 @@ class portfolios extends Component{
         try{
             portfolios = await getPortfolios();
         }catch(error){
-            console.log(error);
+            console.error(error);
         }
 
         return { portfolios };
@@ -68,7 +68,7 @@ class portfolios extends Component{
             const responce = await deletePortfolio(portfolioID);
             Router.pushRoute('/portfolios');
         }catch(error){
-            console.log(error);
+            console.error(error);
         }
     }
 

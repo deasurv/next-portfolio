@@ -23,7 +23,7 @@ class PortfolioEdit extends Component{
         try{
             portfolio = await getPortfolioByID(query.id);
         }catch(error){
-            console.log(error);
+            console.error(error);
         }
 
         return { portfolio };

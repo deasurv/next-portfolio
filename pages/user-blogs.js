@@ -21,7 +21,7 @@ class UserBlogs extends Component{
         try{
             blogs = await getUserBlogs(req);
         } catch(err){
-            console.log(err);
+            console.error(err);
         }
 
         return { blogs };
