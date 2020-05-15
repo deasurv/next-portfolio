@@ -16,6 +16,11 @@
         &-item {
             margin-left: 10px;
             margin-right: 10px;
+
+            @media (max-width: 835px) {
+                margin-left: 5px;
+                margin-right: 5px;
+            }
         }
 
         &-link {
@@ -25,6 +30,10 @@
             letter-spacing: 0.8px;
             text-transform: uppercase;
             cursor: pointer;
+
+            @media (max-width: 835px) {
+                font-size: 16px;
+            }
 
             &.active {
                 color: #dba919;

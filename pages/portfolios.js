@@ -26,7 +26,7 @@ class portfolios extends Component{
         const { isAuthenticated, isSiteOwner } = this.props.auth;
 
         return (
-            <Col md="4" key={index}>
+            <Col md="6" lg="4" key={index}>
                 <PortfolioCard portfolio={portfolio}>
                     { isAuthenticated && isSiteOwner &&
                         <Fragment>
